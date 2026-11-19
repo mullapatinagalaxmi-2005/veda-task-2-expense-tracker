@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple expense tracker to add, edit, filter and manage expenses.">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">PERSONAL FINANCE</p>
+        <h1>Expense Tracker</h1>
+        <p class="subtitle">Keep track of where your money goes.</p>
+      </div>
+      <div class="date-chip" id="todayLabel"></div>
+    </header>
+
+    <section class="summary-grid" aria-label="Spending summary">
+      <article class="summary-card">
+        <span class="summary-label">Total expenses</span>
+        <strong id="totalAmount">₹0.00</strong>
+        <span class="summary-note">All recorded expenses</span>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label">This month</span>
+        <strong id="monthAmount">₹0.00</strong>
+        <span class="summary-note">Spent this month</span>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label">Number of expenses</span>
+        <strong id="expenseCount">0</strong>
+        <span class="summary-note">Transactions recorded</span>
+      </article>
+    </section>
+
+    <section class="content-grid">
+      <section class="panel form-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">NEW TRANSACTION</p>
+            <h2 id="formTitle">Add an expense</h2>
+          </div>
+        </div>
+        <form id="expenseForm">
+          <label for="title">Expense name</label>
+          <input id="title" name="title" type="text" placeholder="e.g. Grocery shopping" maxlength="60" required>
+
+          <div class="form-row">
+            <div>
+              <label for="amount">Amount (₹)</label>
+              <input id="amount" name="amount" type="number" min="0.01" step="0.01" placeholder="0.00" required>
+            </div>
+            <div>
+              <label for="category">Category</label>
+              <select id="category" name="category" required>
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Bills">Bills</option>
+                <option value="Education">Education</option>
+                <option value="Health">Health</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="date">Date</label>
+          <input id="date" name="date" type="date" required>
+
+          <div class="form-actions">
+            <button class="primary-btn" id="submitBtn" type="submit">Add expense</button>
+            <button class="secondary-btn hidden" id="cancelEditBtn" type="button">Cancel</button>
+          </div>
+          <p class="form-message" id="formMessage" role="status"></p>
+        </form>
+      </section>
+
+      <section class="panel list-panel">
+        <div class="list-heading">
+          <div>
+            <p class="eyebrow">YOUR ACTIVITY</p>
+            <h2>Expense history</h2>
+          </div>
+          <span class="result-count" id="resultCount">0 items</span>
+        </div>
+
+        <div class="filters">
+          <div>
+            <label for="searchInput">Search</label>
+            <input id="searchInput" type="search" placeholder="Search expenses...">
+          </div>
+          <div>
+            <label for="categoryFilter">Category</label>
+            <select id="categoryFilter">
+              <option value="All">All categories</option>
+              <option>Food</option><option>Transport</option><option>Shopping</option>
+              <option>Bills</option><option>Education</option><option>Health</option>
+              <option>Entertainment</option><option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="dateFilter">Date</label>
+            <input id="dateFilter" type="date">
+          </div>
+          <div>
+            <label for="sortFilter">Sort by</label>
+            <select id="sortFilter">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="high">Amount: high to low</option>
+              <option value="low">Amount: low to high</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Expense</th><th>Category</th><th>Date</th><th>Amount</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="expenseList"></tbody>
+          </table>
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">₹</div>
+            <h3>No expenses found</h3>
+            <p>Add your first expense or change the filters.</p>
+          </div>
+        </div>
+        <div class="list-footer">
+          <span>Filtered total</span>
+          <strong id="filteredTotal">₹0.00</strong>
+        </div>
+      </section>
+    </section>
+    <footer>Made to help you understand your spending.</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
